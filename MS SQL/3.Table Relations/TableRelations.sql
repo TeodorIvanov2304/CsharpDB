@@ -1,4 +1,4 @@
---1.One-To-One Relationship
+--01.One-To-One Relationship
 
 GO
 CREATE TABLE [Passports]
@@ -29,7 +29,7 @@ SELECT * FROM [Persons]
 
 GO
 
---2.One-To-Many Relationship
+--02.One-To-Many Relationship
 
 CREATE TABLE Manufacturers
 (
@@ -62,7 +62,7 @@ INSERT INTO [Models]
 
 GO
 
---3.Many-To-Many Relationship
+--03.Many-To-Many Relationship
 CREATE TABLE [Students]
 (
 	[StudentID] INT PRIMARY KEY IDENTITY(1,1),
@@ -130,4 +130,101 @@ INSERT INTO [Teachers]
 			(102,'Maya',106)
 
 --05.Online Store Database
+--We start from the table with least dependencies e.g Cities or ItemTypes
 
+GO
+CREATE DATABASE [OnlineStore]
+USE [OnlineStore]
+
+CREATE TABLE [ItemTypes]
+(
+	[ItemTypeID] INT PRIMARY KEY IDENTITY,
+	[Name] VARCHAR(100) NOT NULL
+)
+
+CREATE TABLE [Items]
+(
+	[ItemID] INT PRIMARY KEY IDENTITY,
+	[Name] VARCHAR(100) NOT NULL,
+	[ItemTypeID] INT FOREIGN KEY REFERENCES [ItemTypes](ItemTypeId)
+)
+
+CREATE TABLE [Cities]
+(
+	[CityID] INT PRIMARY KEY IDENTITY,
+	[Name] VARCHAR(100) NOT NULL
+)
+
+CREATE TABLE [Customers]
+(
+	[CustomerID] INT PRIMARY KEY IDENTITY,
+	[Name] VARCHAR(100) NOT NULL,
+	[Birthday] DATETIME2,
+	[CityID] INT FOREIGN KEY REFERENCES [Cities](CityID)
+)
+
+CREATE TABLE [Orders]
+(
+	[OrderID] INT PRIMARY KEY IDENTITY,
+	[CustomerID] INT FOREIGN KEY REFERENCES [Customers](CustomerID)
+)
+
+--Mapping table
+CREATE TABLE [OrderItems]
+(
+	[OrderID] INT FOREIGN KEY REFERENCES [Orders](OrderID),
+	[ItemID] INT FOREIGN KEY REFERENCES [Items](ItemID),
+	CONSTRAINT PK_OrderItems PRIMARY KEY (OrderID,ItemID)
+)
+GO
+
+--06.University Database
+
+CREATE DATABASE [University]
+USE [University]
+
+CREATE TABLE [Majors]
+(
+	[MajorID] INT PRIMARY KEY IDENTITY,
+	[Name] VARCHAR(50) NOT NULL
+)
+
+CREATE TABLE [Students]
+(
+	[StudentID] INT PRIMARY KEY IDENTITY,
+	[StudentNumber] VARCHAR(64) NOT NULL,
+	[StudentName] VARCHAR(100) NOT NULL,
+	[MajorID] INT FOREIGN KEY REFERENCES [Majors](MajorID)
+)
+
+CREATE TABLE [Subjects]
+(
+	[SubjectID] INT PRIMARY KEY IDENTITY,
+	[SubjectName] VARCHAR(64) NOT NULL
+)
+
+CREATE TABLE [Agenda]
+(
+	[StudentID] INT FOREIGN KEY REFERENCES [Students](StudentID),
+	[SubjectID] INT FOREIGN KEY REFERENCES [Subjects](SubjectID),
+	CONSTRAINT PK_Agenda PRIMARY KEY (StudentID,SubjectID)
+)
+
+CREATE TABLE [Payments]
+(
+	[PaymentID] INT PRIMARY KEY IDENTITY,
+	[PaymentDate] DATETIME2 NOT NULL,
+	[PaymentAmount] DECIMAL(10,2) NOT NULL,
+	[StudentID] INT FOREIGN KEY REFERENCES [Students](StudentID)
+)
+
+--09.*Peaks in Rila
+USE [Geography]
+
+  SELECT [MountainRange],
+		 [PeakName],
+		 [Elevation] 
+    FROM [Peaks]
+    JOIN [Mountains] ON Peaks.MountainId = [Mountains].Id
+   WHERE [MountainRange] = 'Rila'
+ORDER BY [Elevation] DESC
