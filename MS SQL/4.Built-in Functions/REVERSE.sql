@@ -1,0 +1,2 @@
+--Reverse
+SELECT REVERSE ('Garo')

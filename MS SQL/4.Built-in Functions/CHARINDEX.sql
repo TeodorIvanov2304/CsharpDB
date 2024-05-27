@@ -1,0 +1,1 @@
+SELECT CHARINDEX('Uni','SoftUni')

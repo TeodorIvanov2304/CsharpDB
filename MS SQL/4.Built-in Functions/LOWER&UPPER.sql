@@ -1,0 +1,5 @@
+--LOWER and UPPER
+
+SELECT LOWER('DARK MATTER QUASAR')
+
+SELECT UPPER('Dark matter quasar')
