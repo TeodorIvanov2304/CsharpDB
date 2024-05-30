@@ -1,0 +1,2 @@
+--Display information about employee's manager and employee's department
+--Show only the first 50 employeesSELECT TOP 50	e.[EmployeeId],	CONCAT_WS(' ',e.[FirstName],e.[LastName]) AS [EmployeeName],    CONCAT_WS(' ',m.[FirstName],m.[LastName]) AS [ManagerName],	d.[Name] AS [DepartmentName]FROM [Employees] AS e--Self-joinJOIN [Employees] AS m ON e.ManagerID = m.EmployeeIDJOIN [Departments] AS d ON e.DepartmentID = d.DepartmentIDORDER BY [EmployeeID]

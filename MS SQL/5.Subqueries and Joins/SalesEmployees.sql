@@ -1,0 +1,1 @@
+--Find all employees that are in the "Sales" department. Use "SoftUni" database.SELECT 	   e.EmployeeID,	   e.FirstName,	   e.LastName,	   d.[Name] AS [Department Name] FROM  [Employees] AS e JOIN [Departments] AS d ON e.DepartmentID = d.DepartmentID AND d.[Name] = 'Sales' ORDER BY e.[EmployeeID]
