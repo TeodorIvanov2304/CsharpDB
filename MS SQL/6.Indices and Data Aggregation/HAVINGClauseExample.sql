@@ -1,0 +1,1 @@
+﻿--▪ Filter departments having total salary more than or equal to 15,000SELECT       e.[DepartmentID],	   SUM(e.[Salary]) AS [TotalSalary]  FROM  [Employees] AS e GROUP BY e.DepartmentIDHAVING SUM(e.[Salary]) >=15000 
