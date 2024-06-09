@@ -6,3 +6,5 @@ AS
  FROM Employees
  WHERE DATEDIFF(Year, HireDate, GETDATE()) > 20
 GO
+
+EXEC dbo.usp_SelectEmployeesBySeniority
