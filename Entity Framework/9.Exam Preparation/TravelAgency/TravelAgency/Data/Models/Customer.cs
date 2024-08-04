@@ -19,6 +19,6 @@ namespace TravelAgency.Data.Models
         [Required]
         public string PhoneNumber { get; set; } = null!;
 
-        public ICollection<Booking> Bookings { get; set; }
+        public ICollection<Booking> Bookings { get; set; } = new HashSet<Booking>();
     }
 }

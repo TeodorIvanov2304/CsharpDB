@@ -7,9 +7,9 @@ namespace TravelAgency.DataProcessor.ExportDtos
     public class ExportGuideWithSpanish
     {
         [XmlElement("FullName")]
-        public string FullName { get; set; }
+        public string FullName { get; set; } = null!;
 
         [XmlArray("TourPackages")]
-        public ExportGuideTourPackages[] TourPackages { get; set; }
+        public ExportGuideTourPackages[] TourPackages { get; set; } = new ExportGuideTourPackages[0];
     }
 }

@@ -10,18 +10,18 @@ namespace TravelAgency.DataProcessor.ImportDtos
         [Required]
         [XmlAttribute("phoneNumber")]
         [RegularExpression(@"^\+[0-9]{12}$")]
-        public string PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; } = null!;
 
         [Required]
         [XmlElement("FullName")]
         [MinLength(CustomerFullNameMinValue)]
         [MaxLength(CustomerFullNameMaxValue)]
-        public string FullName { get; set; }
+        public string FullName { get; set; } = null!;
 
         [Required]
         [XmlElement("Email")]
         [MinLength(CustomerEmailMinValue)]
         [MaxLength(CustomerEmailMaxValue)]
-        public string Email { get; set; }
+        public string Email { get; set; } = null!;
     }
 }

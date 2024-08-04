@@ -8,11 +8,11 @@ namespace TravelAgency.Data.Models
         [Key]
         [ForeignKey(nameof(TourPackage))]
         public int TourPackageId  { get; set; }
-        public TourPackage TourPackage { get; set; }
+        public TourPackage TourPackage { get; set; } = null!;
 
         [Key]
         [ForeignKey(nameof(Guide))]
         public int GuideId  { get; set; }
-        public Guide Guide { get; set; }
+        public Guide Guide { get; set; } = null!;
     }
 }

@@ -17,8 +17,8 @@ namespace TravelAgency.Data.Models
 
         [Required]
         public decimal Price  { get; set; }
-        public ICollection<Booking> Bookings { get; set; }
+        public ICollection<Booking> Bookings { get; set; } = new HashSet<Booking>();
 
-        public ICollection<TourPackageGuide> TourPackagesGuides { get; set; }
+        public ICollection<TourPackageGuide> TourPackagesGuides { get; set; } = new HashSet<TourPackageGuide>();
     }
 }

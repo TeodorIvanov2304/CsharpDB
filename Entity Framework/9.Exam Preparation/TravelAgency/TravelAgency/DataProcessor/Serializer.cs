@@ -9,7 +9,7 @@ namespace TravelAgency.DataProcessor
     {
         public static string ExportGuidesWithSpanishLanguageWithAllTheirTourPackages(TravelAgencyContext context)
         {
-            var guides = context.Guides
+            ExportGuideWithSpanish[] guides = context.Guides
                 .Where(g=>g.Language == Data.Models.Enums.Language.Spanish)
                 .Select(g=> new ExportGuideWithSpanish() 
             {
@@ -36,7 +36,7 @@ namespace TravelAgency.DataProcessor
 
         public static string ExportCustomersThatHaveBookedHorseRidingTourPackage(TravelAgencyContext context)
         {
-            var customersWithHorse = context.Customers
+            ExportCustomerWithHorseRideDto[] customersWithHorse = context.Customers
                 .Where(c => c.Bookings.Any(b => b.TourPackage.PackageName == "Horse Riding Tour"))
                 .Select(c => new ExportCustomerWithHorseRideDto()
                 {

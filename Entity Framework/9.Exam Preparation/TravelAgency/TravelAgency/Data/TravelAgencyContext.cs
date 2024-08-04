@@ -19,11 +19,11 @@ namespace TravelAgency.Data
 
         }
 
-        public DbSet<Booking> Bookings { get; set; }
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Guide> Guides { get; set; }
-        public DbSet<TourPackage> TourPackages { get; set; }
-        public DbSet<TourPackageGuide> TourPackagesGuides { get; set; }
+        public DbSet<Booking> Bookings { get; set; } = null!;
+        public DbSet<Customer> Customers { get; set; } = null!;
+        public DbSet<Guide> Guides { get; set; } = null!;
+        public DbSet<TourPackage> TourPackages { get; set; } = null!;
+        public DbSet<TourPackageGuide> TourPackagesGuides { get; set; } = null!;
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -35,7 +35,8 @@ namespace TravelAgency.Data
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+        {   
+            //PK TourPackageGuide
             modelBuilder
                 .Entity<TourPackageGuide>()
                 .HasKey(pk => new { pk.TourPackageId, pk.GuideId });

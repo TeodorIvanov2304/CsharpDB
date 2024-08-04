@@ -16,6 +16,6 @@ namespace TravelAgency.Data.Models
         [Required]
         public Language Language  { get; set; }
 
-        public ICollection<TourPackageGuide> TourPackagesGuides  { get; set; }
+        public ICollection<TourPackageGuide> TourPackagesGuides  { get; set; } = new HashSet<TourPackageGuide>();
     }
 }

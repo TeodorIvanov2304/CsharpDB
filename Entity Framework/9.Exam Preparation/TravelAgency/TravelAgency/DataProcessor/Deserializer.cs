@@ -33,23 +33,23 @@ namespace TravelAgency.DataProcessor
                     continue;
                 }
 
-                Customer newCustmer = new Customer() 
+                Customer newCustomer = new Customer() 
                 {
                     PhoneNumber = customerDto.PhoneNumber,
                     FullName = customerDto.FullName,
                     Email = customerDto.Email
                 };
 
-                if (customersToImport.Any(c=>c.FullName == customerDto.FullName)||
-                    customersToImport.Any(c => c.Email == customerDto.Email)||
-                    customersToImport.Any(c => c.PhoneNumber == customerDto.PhoneNumber))
+                if  (  customersToImport.Any(c=>c.FullName == customerDto.FullName)
+                    || customersToImport.Any(c => c.Email == customerDto.Email)
+                    || customersToImport.Any(c => c.PhoneNumber == customerDto.PhoneNumber))
                 {
                     sb.AppendLine(DuplicationDataMessage);
                     continue;
                 }
 
-                customersToImport.Add(newCustmer);
-                sb.AppendLine(String.Format(SuccessfullyImportedCustomer, newCustmer.FullName));
+                customersToImport.Add(newCustomer);
+                sb.AppendLine(String.Format(SuccessfullyImportedCustomer, newCustomer.FullName));
             }
 
             context.Customers.AddRange(customersToImport);
@@ -62,7 +62,6 @@ namespace TravelAgency.DataProcessor
             StringBuilder sb = new();
             ImportBookingDto[] bookingDtos = JsonConvert.DeserializeObject<ImportBookingDto[]>(jsonString)!;
             ICollection<Booking> bookingsToImport = new HashSet<Booking>();
-
 
             foreach (var bookingDto in bookingDtos)
             {
@@ -84,7 +83,7 @@ namespace TravelAgency.DataProcessor
                 Booking newBooking = new Booking() 
                 {
                     BookingDate = DateTime.ParseExact(bookingDto.BookingDate, "yyyy-MM-dd",CultureInfo.InvariantCulture),
-                    Customer = context.Customers.First(c=>c.FullName == bookingDto.CustomerName),
+                    Customer = context.Customers.FirstOrDefault(c=>c.FullName == bookingDto.CustomerName),
                     TourPackage = context.TourPackages.First(t=>t.PackageName == bookingDto.TourPackageName),
                 };
 

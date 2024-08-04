@@ -51,7 +51,7 @@ namespace TravelAgency.Utilities
             return sb.ToString().TrimEnd();
         }
 
-        //Serializing method!!! 2
+        //Serializing method 2
         public static string SerializeToXml<T>(T dto, string xmlRootAttribute, bool omitDeclaration = false)
         {
             XmlSerializer xmlSerializer =
